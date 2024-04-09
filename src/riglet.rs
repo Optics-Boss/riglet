@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::Read;
+use std::collections::HashMap;
 
 pub fn convert(text: String) -> String {
     let mut data_file = File::open("./src/standard.flf").unwrap();
@@ -9,6 +10,15 @@ pub fn convert(text: String) -> String {
     let mut collection: Vec<&str> = parts.collect();
     collection.remove(0);
 
-    println!("{}", collection.get(2).unwrap().replace("@", ""));
-    return String::from("Test");
+    let mut char_to_ascii = HashMap::new();
+    char_to_ascii.insert('#', collection.get(2).unwrap().replace("@", ""));
+    char_to_ascii.insert('$', collection.get(3).unwrap().replace("@", ""));
+
+    let mut result = String::from("");
+    
+    for character in text.chars() {
+        result.push_str(char_to_ascii.get(&character).unwrap());
+    }
+
+    return result;
 }
