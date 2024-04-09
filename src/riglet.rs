@@ -8,8 +8,7 @@ pub fn convert(text: String) -> String {
     let parts = file_content.split("@@");
     let mut collection: Vec<&str> = parts.collect();
     collection.remove(0);
-    println!("{}", collection.get(2).unwrap().replace("@", ""));
 
+    println!("{}", collection.get(2).unwrap().replace("@", ""));
     return String::from("Test");
 }
-
