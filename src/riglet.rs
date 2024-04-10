@@ -14,11 +14,15 @@ pub fn convert(text: String) -> String {
     char_to_ascii.insert('#', collection.get(2).unwrap().replace("@", ""));
     char_to_ascii.insert('$', collection.get(3).unwrap().replace("@", ""));
 
+    return string_to_ascii(text, char_to_ascii)
+}
+
+fn string_to_ascii(text: String, char_to_ascii: HashMap<char, String>) -> String {
     let mut result = String::from("");
     
     for character in text.chars() {
         result.push_str(char_to_ascii.get(&character).unwrap());
     }
 
-    return result;
+    return result
 }
