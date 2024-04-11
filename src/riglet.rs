@@ -1,8 +1,9 @@
 use std::fs::File;
 use std::io::Read;
 use std::collections::HashMap;
+use std::collections::BTreeMap;
 
-pub fn convert(text: String) -> String {
+pub fn convert(text: String) -> BTreeMap<i32, String> {
     let mut data_file = File::open("./src/standard.flf").unwrap();
     let mut file_content = String::new();
     data_file.read_to_string(&mut file_content).unwrap();
@@ -62,56 +63,40 @@ fn setup_hash_map(collection: Vec<&str>) -> HashMap<char, String> {
     return char_to_ascii
 }
 
-fn string_to_ascii(text: String, char_to_ascii: HashMap<char, String>) -> String {
+fn string_to_ascii(text: String, char_to_ascii: HashMap<char, String>) -> BTreeMap<i32, String> {
     let mut print_ascii = Vec::new();
-    let result = String::from("");
     
     for character in text.chars() {
         print_ascii.push(char_to_ascii.get(&character).unwrap());
     }
 
-    let mut string_test = String::from("");
-    let mut string_test_2 = String::from("");
-    let mut string_test_3 = String::from("");
-    let mut string_test_4 = String::from("");
-    let mut string_test_5 = String::from("");
-    let mut string_test_6 = String::from("");
+    let mut map_ascii = BTreeMap::from([
+        (0, String::from("")),
+        (1, String::from("")),
+        (2, String::from("")),
+        (3, String::from("")),
+        (4, String::from("")),
+        (5, String::from("")),
+        (6, String::from("")),
+    ]);
 
     for string_ascii in &print_ascii {
         let mut test_number = 0;
 
         for string in string_ascii.split("\n") {
-            if test_number == 0 {
-                string_test.push_str(string)
-            }
-            if test_number == 1 {
-                string_test_2.push_str(string)
-            }
-            if test_number == 2 {
-                string_test_3.push_str(string)
-            }
-            if test_number == 3 {
-                string_test_4.push_str(string)
-            }
-            if test_number == 4 {
-                string_test_5.push_str(string)
-            }
-            if test_number == 5 {
-                string_test_6.push_str(string)
-            }
-
+            map_ascii.get_mut(&test_number).unwrap().push_str(string);
             test_number += 1;
         }
     }
 
-    println!("{}", string_test);
-    println!("{}", string_test_2);
-    println!("{}", string_test_3);
-    println!("{}", string_test_4);
-    println!("{}", string_test_5);
-    println!("{}", string_test_6);
+    map_ascii
+}
 
-    return result
+
+pub fn print_ascii(to_print_ascii: BTreeMap<i32, String>) -> () {
+    for (c, string) in to_print_ascii {
+        println!("{}", string)
+    }
 }
 
 
