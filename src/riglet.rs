@@ -17,6 +17,20 @@ pub fn convert(text: String) -> BTreeMap<i32, String> {
 }
 
 fn setup_hash_map(collection: Vec<&str>) -> HashMap<char, String> {
+
+    let list_of_numbers = [
+        '0', 
+        '1', 
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+    ];
+
     let list_of_chars = [
         'A', 
         'B', 
@@ -45,13 +59,61 @@ fn setup_hash_map(collection: Vec<&str>) -> HashMap<char, String> {
         'Y',
         'Z',
     ];
-    
-    let mut start_index = 32;
 
-    
+    let list_of_small_chars = [
+        'a', 
+        'b', 
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z',
+    ];
+
     let mut char_to_ascii = HashMap::new();
 
+    let mut start_index = 15;
+    for hash_char in list_of_numbers {
+        println!("{}", collection.get(start_index).unwrap().replace("@", ""));
+        char_to_ascii.insert(
+            hash_char, 
+            collection.get(start_index).unwrap().replace("@", "")
+        );
+
+        start_index += 1;
+    }
+    
+    let mut start_index = 32;
     for hash_char in list_of_chars {
+        char_to_ascii.insert(
+            hash_char, 
+            collection.get(start_index).unwrap().replace("@", "")
+        );
+
+        start_index += 1;
+    }
+
+    let mut start_index = 64;
+    for hash_char in list_of_small_chars {
         char_to_ascii.insert(
             hash_char, 
             collection.get(start_index).unwrap().replace("@", "")
