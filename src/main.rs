@@ -1,5 +1,5 @@
 pub mod riglet;
 
 fn main() {
-    println!("{}", riglet::convert(String::from("ABCDEFGHI")))
+    println!("{}", riglet::convert(String::from("TEST")))
 }

@@ -58,15 +58,58 @@ fn setup_hash_map(collection: Vec<&str>) -> HashMap<char, String> {
 
         start_index += 1;
     }
+
     return char_to_ascii
 }
 
 fn string_to_ascii(text: String, char_to_ascii: HashMap<char, String>) -> String {
-    let mut result = String::from("");
+    let mut print_ascii = Vec::new();
+    let result = String::from("");
     
     for character in text.chars() {
-        result.push_str(&char_to_ascii.get(&character).unwrap());
+        print_ascii.push(char_to_ascii.get(&character).unwrap());
     }
+
+    let mut string_test = String::from("");
+    let mut string_test_2 = String::from("");
+    let mut string_test_3 = String::from("");
+    let mut string_test_4 = String::from("");
+    let mut string_test_5 = String::from("");
+    let mut string_test_6 = String::from("");
+
+    for string_ascii in &print_ascii {
+        let mut test_number = 0;
+
+        for string in string_ascii.split("\n") {
+            if test_number == 0 {
+                string_test.push_str(string)
+            }
+            if test_number == 1 {
+                string_test_2.push_str(string)
+            }
+            if test_number == 2 {
+                string_test_3.push_str(string)
+            }
+            if test_number == 3 {
+                string_test_4.push_str(string)
+            }
+            if test_number == 4 {
+                string_test_5.push_str(string)
+            }
+            if test_number == 5 {
+                string_test_6.push_str(string)
+            }
+
+            test_number += 1;
+        }
+    }
+
+    println!("{}", string_test);
+    println!("{}", string_test_2);
+    println!("{}", string_test_3);
+    println!("{}", string_test_4);
+    println!("{}", string_test_5);
+    println!("{}", string_test_6);
 
     return result
 }
