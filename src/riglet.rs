@@ -1,9 +1,13 @@
+//! # Riglet 
+//!
+//! Riglet is a rust port of Figlet
+
 use std::fs::File;
 use std::io::Read;
 use std::collections::HashMap;
 use std::collections::BTreeMap;
 
-/// Prints the Ascii
+/// Converts text to ascii letter that you can print out. It uses the standard font from figlet
 pub fn convert(text: String) -> BTreeMap<i32, String> {
     let mut data_file = File::open("./src/standard.flf").unwrap();
     let mut file_content = String::new();
@@ -17,6 +21,8 @@ pub fn convert(text: String) -> BTreeMap<i32, String> {
     return string_to_ascii(text, char_to_ascii)
 }
 
+
+/// Setup the hash map with the char and string
 fn setup_hash_map(collection: Vec<&str>) -> HashMap<char, String> {
 
     let list_of_numbers = [
@@ -94,7 +100,6 @@ fn setup_hash_map(collection: Vec<&str>) -> HashMap<char, String> {
 
     let mut start_index = 15;
     for hash_char in list_of_numbers {
-        println!("{}", collection.get(start_index).unwrap().replace("@", ""));
         char_to_ascii.insert(
             hash_char, 
             collection.get(start_index).unwrap().replace("@", "")
@@ -126,6 +131,7 @@ fn setup_hash_map(collection: Vec<&str>) -> HashMap<char, String> {
     return char_to_ascii
 }
 
+/// Your inputed string to ascii letters
 fn string_to_ascii(text: String, char_to_ascii: HashMap<char, String>) -> BTreeMap<i32, String> {
     let mut print_ascii = Vec::new();
     
@@ -166,6 +172,19 @@ pub fn print_ascii(to_print_ascii: BTreeMap<i32, String>) -> () {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_convert() {
+        let args = String::from("T");
+        let anwser = convert(args);
+        
+        assert_eq!(Some(&String::from("")), anwser.get(&0));
+        assert_eq!(Some(&String::from("  _____ ")), anwser.get(&1));
+        assert_eq!(Some(&String::from(" |_   _|")), anwser.get(&2));
+        assert_eq!(Some(&String::from("   | |  ")), anwser.get(&3));
+        assert_eq!(Some(&String::from("   | |  ")), anwser.get(&4));
+        assert_eq!(Some(&String::from("   |_|  ")), anwser.get(&5));
+    }
 
     #[test]
     fn test_string_to_ascii() {
