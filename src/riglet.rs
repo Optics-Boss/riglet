@@ -3,6 +3,7 @@ use std::io::Read;
 use std::collections::HashMap;
 use std::collections::BTreeMap;
 
+/// Prints the Ascii
 pub fn convert(text: String) -> BTreeMap<i32, String> {
     let mut data_file = File::open("./src/standard.flf").unwrap();
     let mut file_content = String::new();
@@ -155,10 +156,33 @@ fn string_to_ascii(text: String, char_to_ascii: HashMap<char, String>) -> BTreeM
 }
 
 
+/// Prints the Ascii
 pub fn print_ascii(to_print_ascii: BTreeMap<i32, String>) -> () {
     for (c, string) in to_print_ascii {
         println!("{}", string)
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
 
+    #[test]
+    fn test_string_to_ascii() {
+        let args = String::from("T");
+
+        let anwser = string_to_ascii(args, HashMap::from([('T', String::from("  _____ 
+ |_   _|
+   | |  
+   | |  
+   |_|  
+      "))])
+                                     );
+        
+        assert_eq!(Some(&String::from("  _____ ")), anwser.get(&0));
+        assert_eq!(Some(&String::from(" |_   _|")), anwser.get(&1));
+        assert_eq!(Some(&String::from("   | |  ")), anwser.get(&2));
+        assert_eq!(Some(&String::from("   | |  ")), anwser.get(&3));
+        assert_eq!(Some(&String::from("   |_|  ")), anwser.get(&4));
+    }
+}
