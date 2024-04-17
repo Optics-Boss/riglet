@@ -1,6 +1,12 @@
 //! # Riglet 
 //!
-//! Riglet is a rust port of Figlet
+//! Riglet is a Rust port of Figlet
+//! # Examples
+//!
+//! ```
+//! let ascii = riglet::convert(String::from("abcdef123456"));
+//! riglet::print_ascii(ascii);
+//! ```
 
 use std::fs::File;
 use std::io::Read;
@@ -8,6 +14,11 @@ use std::collections::HashMap;
 use std::collections::BTreeMap;
 
 /// Converts text to ascii letter that you can print out. It uses the standard font from figlet
+/// # Examples
+///
+/// ```
+/// riglet::convert(String::from("abcdef123456"));
+/// ```
 pub fn convert(text: String) -> BTreeMap<i32, String> {
     let mut data_file = File::open("./src/standard.flf").unwrap();
     let mut file_content = String::new();
@@ -163,6 +174,11 @@ fn string_to_ascii(text: String, char_to_ascii: HashMap<char, String>) -> BTreeM
 
 
 /// Prints the Ascii
+/// # Examples
+///
+/// ```
+///  riglet::print_ascii(ascii);
+/// ```
 pub fn print_ascii(to_print_ascii: BTreeMap<i32, String>) -> () {
     for (c, string) in to_print_ascii {
         println!("{}", string)
