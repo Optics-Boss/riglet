@@ -4,8 +4,12 @@
 //! # Examples
 //!
 //! ```
-//! let ascii = riglet::convert(String::from("abcdef123456"));
-//! riglet::print_ascii(ascii);
+//! use riglet::riglet;
+//!
+//! fn main() {
+//!    let ascii = riglet::convert(String::from("Abc Def 123 456"));
+//!    riglet::print_ascii(ascii);
+//! }
 //! ```
 pub mod riglet {
 
@@ -209,6 +213,19 @@ pub mod riglet {
             assert_eq!(Some(&String::from("   | |  ")), anwser.get(&3));
             assert_eq!(Some(&String::from("   | |  ")), anwser.get(&4));
             assert_eq!(Some(&String::from("   |_|  ")), anwser.get(&5));
+        }
+
+        #[test]
+        fn test_convert_space() {
+            let args = String::from(" ");
+            let anwser = convert(args);
+            
+            assert_eq!(Some(&String::from("")), anwser.get(&0));
+            assert_eq!(Some(&String::from("  ")), anwser.get(&1));
+            assert_eq!(Some(&String::from("  ")), anwser.get(&2));
+            assert_eq!(Some(&String::from("  ")), anwser.get(&3));
+            assert_eq!(Some(&String::from("  ")), anwser.get(&4));
+            assert_eq!(Some(&String::from("  ")), anwser.get(&5));
         }
 
         #[test]
