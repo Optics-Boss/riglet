@@ -13,8 +13,6 @@
 //! ```
 pub mod riglet {
 
-    use std::fs::File;
-    use std::io::Read;
     use std::collections::HashMap;
     use std::collections::BTreeMap;
     /// Converts text to ascii letter that you can print out. It uses the standard font from figlet
@@ -24,10 +22,8 @@ pub mod riglet {
     /// riglet::convert(String::from("abcdef123456"));
     /// ```
     pub fn convert(text: String) -> BTreeMap<i32, String> {
-        let mut data_file = File::open("standard.flf").unwrap();
-        let mut file_content = String::new();
-        data_file.read_to_string(&mut file_content).unwrap();
-        let parts = file_content.split("@@");
+        let data_file = std::include_str!("standard.flf");
+        let parts = data_file.split("@@");
         let mut collection: Vec<&str> = parts.collect();
         collection.remove(0);
 
