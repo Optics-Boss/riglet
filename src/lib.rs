@@ -24,7 +24,7 @@ pub mod riglet {
     /// riglet::convert(String::from("abcdef123456"));
     /// ```
     pub fn convert(text: String) -> BTreeMap<i32, String> {
-        let mut data_file = File::open("./src/standard.flf").unwrap();
+        let mut data_file = File::open("standard.flf").unwrap();
         let mut file_content = String::new();
         data_file.read_to_string(&mut file_content).unwrap();
         let parts = file_content.split("@@");
