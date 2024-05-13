@@ -13,10 +13,12 @@ fn main() {
 }
 ```
 
+![riglet_example](example_riglet.png)
+
 # Task list
-- [ ] Special characters 
+- [X] Special characters 
 - [ ] Diacritic characters
-- [ ] More documentation
+- [X] More documentation
 - [ ] More fonts from figlet
 
 
