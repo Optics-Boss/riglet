@@ -36,7 +36,22 @@ pub mod riglet {
     /// Setup the hash map with the char and string
     fn setup_hash_map(collection: Vec<&str>) -> HashMap<char, String> {
 
-        let list_of_numbers = [
+        let list_of_special_chars = [
+            '!', 
+            '"', 
+            '#',
+            '$',
+            '%',
+            '&',
+            '\'',
+            '(',
+            ')',
+            '*',
+            '+',
+            ',',
+            '-',
+            '.',
+            '/',
             '0', 
             '1', 
             '2',
@@ -47,9 +62,13 @@ pub mod riglet {
             '7',
             '8',
             '9',
-        ];
-
-        let list_of_chars = [
+            ':',
+            ';',
+            '<',
+            '=',
+            '>',
+            '?',
+            '@',
             'A', 
             'B', 
             'C',
@@ -76,9 +95,12 @@ pub mod riglet {
             'X',
             'Y',
             'Z',
-        ];
-
-        let list_of_small_chars = [
+            '[',
+            '\\',
+            ']',
+            '^',
+            '_',
+            '\'',
             'a', 
             'b', 
             'c',
@@ -105,12 +127,17 @@ pub mod riglet {
             'x',
             'y',
             'z',
+            '{',
+            '|',
+            '}',
+            '~',
         ];
+
 
         let mut char_to_ascii = HashMap::new();
 
-        let mut start_index = 15;
-        for hash_char in list_of_numbers {
+        let mut start_index = 0;
+        for hash_char in list_of_special_chars {
             char_to_ascii.insert(
                 hash_char, 
                 collection.get(start_index).unwrap().replace("@", "")
@@ -118,27 +145,6 @@ pub mod riglet {
 
             start_index += 1;
         }
-        
-        let mut start_index = 32;
-        for hash_char in list_of_chars {
-            char_to_ascii.insert(
-                hash_char, 
-                collection.get(start_index).unwrap().replace("@", "")
-            );
-
-            start_index += 1;
-        }
-
-        let mut start_index = 64;
-        for hash_char in list_of_small_chars {
-            char_to_ascii.insert(
-                hash_char, 
-                collection.get(start_index).unwrap().replace("@", "")
-            );
-
-            start_index += 1;
-        }
-
 
         char_to_ascii.insert(
             ' ', 
