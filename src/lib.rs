@@ -4,22 +4,24 @@
 //! # Examples
 //!
 //! ```
-//! use riglet::riglet;
+//! use riglet::riglet::convert;
+//! use riglet::riglet::print_ascii;
 //!
-//! fn main() {
-//!    let ascii = riglet::convert(String::from("Abc Def 123 456"));
-//!    riglet::print_ascii(ascii);
-//! }
+//! let ascii = convert(String::from("Abc Def 123 456"));
+//! print_ascii(ascii);
 //! ```
 pub mod riglet {
 
     use std::collections::HashMap;
     use std::collections::BTreeMap;
+
     /// Converts text to ascii letter that you can print out. It uses the standard font from figlet
     /// # Examples
     ///
     /// ```
-    /// riglet::convert(String::from("abcdef123456"));
+    /// use riglet::riglet::convert;
+    ///
+    /// convert(String::from("abcdef123456"));
     /// ```
     pub fn convert(text: String) -> BTreeMap<i32, String> {
         let data_file = std::include_str!("standard.flf");
@@ -148,7 +150,11 @@ pub mod riglet {
 
         char_to_ascii.insert(
             ' ', 
-            collection.get(101).unwrap().replace("$@", "  ").replace("$", "  ").replace("160  NO-BREAK SPACE", "  ")
+            collection
+            .get(101)
+            .unwrap()
+            .replace("$@", " ")
+            .replace("160  NO-BREAK SPACE", "  ")
         );
 
         return char_to_ascii
@@ -173,14 +179,14 @@ pub mod riglet {
         ]);
 
         for string_ascii in &print_ascii {
-            let mut test_number = 0;
+            let mut line_number = 0;
 
             for string in string_ascii.split("\n") {
-                if test_number <= 6 {
-                   map_ascii.get_mut(&test_number).unwrap().push_str(string);
+                if line_number <= 6 {
+                   map_ascii.get_mut(&line_number).unwrap().push_str(string);
                 }
 
-                test_number += 1;
+                line_number += 1;
             }
         }
 
@@ -190,9 +196,11 @@ pub mod riglet {
 
     /// Prints the Ascii
     /// # Examples
-    ///
     /// ```
-    ///  riglet::print_ascii(ascii);
+    /// use riglet::riglet::convert;
+    /// use riglet::riglet::print_ascii;
+    ///
+    /// let ascii = convert(String::from("Abc Def 123 456"));
     /// ```
     pub fn print_ascii(to_print_ascii: BTreeMap<i32, String>) -> () {
         for (_c, string) in to_print_ascii {
@@ -235,10 +243,10 @@ pub mod riglet {
             let args = String::from("T");
 
             let anwser = string_to_ascii(args, HashMap::from([('T', String::from("  _____ 
-     |_   _|
-       | |  
-       | |  
-       |_|  
+ |_   _|
+   | |  
+   | |  
+   |_|  
           "))])
                                          );
             
